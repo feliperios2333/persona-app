@@ -43,3 +43,5 @@ Route :: get('/departamento',[DepartamentoContoller::class, 'index']) ->name ('d
 Route :: post('/departamento',[DepartamentoContoller::class, 'store']) ->name ('departamento.store');
 Route :: get('/departamento/create',[DepartamentoContoller::class, 'create']) ->name ('departamento.create');
 Route :: delete('/departamento/{departamento}',[DepartamentoContoller::class, 'destroy']) ->name ('departamento.destroy');
+Route :: put('/departamento/{departamento}',[DepartamentoContoller::class, 'update']) ->name ('departamento.update');
+Route :: get('/departamento/{departamento}/edit',[DepartamentoContoller::class, 'edit']) ->name ('departamento.edit');
