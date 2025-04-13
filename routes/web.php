@@ -32,3 +32,4 @@ Route :: get ('/comuna/{comuna}/edit',[Comunacontroller :: class, 'edit']) -> na
 Route::get('/municipio', [MunicipioController::class, 'index'])->name('municipio.index');
 Route:: post('/municipio', [MunicipioController::class, 'store']) ->name('municipio.store');
 Route:: get('/municipio/create', [MunicipioController::class, 'create']) ->name('municipio.create');
+Route:: delete('/municipio/{municipio}', [MunicipioController::class, 'destroy']) ->name('municipio.destroy');

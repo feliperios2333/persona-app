@@ -14,7 +14,7 @@ class MunicipioController extends Controller
      */
     public function index()
     {
-        $municipios = DB :: table('tb_municipio') // Realiza una consulta a la tabla 'tb_municipio'
+        $municipios = DB::table('tb_municipio') // Realiza una consulta a la tabla 'tb_municipio'
             ->join('tb_departamento', 'tb_municipio.depa_codi', '=', 'tb_departamento.depa_codi') // Realiza una unión con la tabla 'tb_departamento'
             ->select('tb_municipio.*', 'tb_departamento.depa_nomb')
             ->get();  // Selecciona todas las columnas de 'tb_municipio' y la columna 'depa_nomb' de 'tb_departamento'
@@ -95,6 +95,15 @@ class MunicipioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $municipio = Municipio::find($id); // Busca el municipio por su ID
+        $municipio->delete();
+
+        $municipios = DB::table('tb_municipio') // Realiza una consulta a la tabla 'tb_municipio'
+            ->join('tb_departamento', 'tb_municipio.depa_codi', '=', 'tb_departamento.depa_codi') // Realiza una unión con la tabla 'tb_departamento'
+            ->select('tb_municipio.*', 'tb_departamento.depa_nomb') // Selecciona todas las columnas de 'tb_municipio' y la columna 'depa_nomb' de 'tb_departamento'
+            ->get(); // Obtiene todos los registros de la tabla
+        return view('municipio.index', ['municipios' => $municipios]); // Retorna la vista 'municipio.index' y pasa los registros obtenidos como una variable llamada 'municipios'
+
+        // Elimina el municipio de la base de datos
     }
 }
