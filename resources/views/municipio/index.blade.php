@@ -9,12 +9,12 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>Listado de Municipios</title>
+    <title>Municipalities list</title>
 </head>
 
 <body>
     <div class="container">
-        <h1>Listado de Municipios</h1>
+        <h1>Municipalities list</h1>
         <a href="{{ route('municipio.create') }}" class="btn btn-success">Add</a>
         <table class="table">
             <thead>
@@ -32,6 +32,8 @@
                     <td>{{$municipio ->muni_nomb}}</td>
                     <td>{{$municipio ->depa_nomb}}</td>
                     <td>
+                        <a href="{{ route ('municipio.edit',['municipio' => $municipio ->muni_codi]) }}"
+                        class="btn btn-info">Edit</a>
                         <form action="{{ route ('municipio.destroy' , ['municipio' =>$municipio->muni_codi]) }}"
                             method="POST" style="display:inline-block">
                             @method ('delete')

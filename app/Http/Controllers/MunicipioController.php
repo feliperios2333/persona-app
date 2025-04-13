@@ -72,7 +72,11 @@ class MunicipioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $municipio = Municipio::find($id); // Busca el municipio por su ID
+        $departamentos = DB::table('tb_departamento') // Realiza una consulta a la tabla 'tb_departamento'
+            ->orderBy('depa_nomb') // Ordena los resultados por la columna 'depa_nomb'
+            ->get(); // Obtiene todos los registros de la tabla
+        return view('municipio.edit', ['municipio' => $municipio, 'departamentos' => $departamentos]); // Retorna la vista 'municipio.edit' y pasa el municipio y los departamentos como variables
     }
 
     /**
@@ -84,7 +88,16 @@ class MunicipioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $municipio = Municipio::find($id); // Busca el municipio por su ID
+        $municipio->muni_nomb = $request->name; // Asigna el nuevo nombre del municipio desde la solicitud
+        $municipio->depa_codi = $request->code; // Asigna el nuevo código del departamento desde la solicitud
+        $municipio->save(); // Guarda los cambios en la base de datos
+
+        $municipios = DB::table('tb_municipio') // Realiza una consulta a la tabla 'tb_municipio'
+            ->join('tb_departamento', 'tb_municipio.depa_codi', '=', 'tb_departamento.depa_codi') // Realiza una unión con la tabla 'tb_departamento'
+            ->select('tb_municipio.*', 'tb_departamento.depa_nomb') // Selecciona todas las columnas de 'tb_municipio' y la columna 'depa_nomb' de 'tb_departamento'
+            ->get(); // Obtiene todos los registros de la tabla
+        return view('municipio.index', ['municipios' => $municipios]); // Retorna la vista 'municipio.index' y pasa los registros obtenidos como una variable llamada 'municipios'
     }
 
     /**
