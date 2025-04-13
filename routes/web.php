@@ -22,4 +22,5 @@ Route::get('/', function () {
 Route::get('/comuna', [Comunacontroller::class, 'index']) ->name ('comuna.index');
 Route ::post('/comuna',[Comunacontroller :: class, 'store']) -> name ('comuna.store'); 
 Route ::get ('/comuna/create',[Comunacontroller :: class, 'create']) -> name ('comuna.create');
+Route :: delete ('/comuna/{comuna}',[Comunacontroller :: class, 'destroy']) -> name ('comuna.destroy');
 // Ruta para mostrar el listado de comunas

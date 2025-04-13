@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Comuna; // Importa el modelo Comuna
+use App\Models\Comuna; // Importa el modelo Municipio
 use Illuminate\Support\Facades\DB; // Importa la clase DB para realizar consultas a la base de datos
 
 class Comunacontroller extends Controller
@@ -40,7 +40,7 @@ class Comunacontroller extends Controller
      */
     public function create()
     {
-        
+
         $municipios = DB::table('tb_municipio')
             ->orderBy('muni_nomb')
             ->get();
@@ -56,11 +56,11 @@ class Comunacontroller extends Controller
     public function store(Request $request)
     {
         $comuna = new Comuna();
-        $comuna->comu_nomb =$request->name;
+        $comuna->comu_nomb = $request->name;
         $comuna->muni_codi = $request->code;
         $comuna->save();
 
-        $comunas =DB::table('tb_comuna')
+        $comunas = DB::table('tb_comuna')
             ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
             ->select('tb_comuna.*', 'tb_municipio.muni_nomb')
             ->get();
@@ -109,6 +109,16 @@ class Comunacontroller extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Busca la comuna por su ID
+        $comuna = Comuna::find($id);
+        $comuna->delete();
+
+        // Realiza una consulta a la base de datos para obtener los registros de la tabla 'tb_comuna'
+        $comunas = DB::table('tb_comuna')
+            ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
+            ->select('tb_comuna.*', 'tb_municipio.muni_nomb')
+            ->get();
+        // Retorna la vista 'comuna.index' y pasa los registros obtenidos como una variable llamada 'comunas'
+        return view('comuna.index', ['comunas' => $comunas]);
     }
 }
