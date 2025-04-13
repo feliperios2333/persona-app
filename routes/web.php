@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Comunacontroller; // Importa el controlador Comunacontroller
 use App\Http\Controllers\DepartamentoContoller;
-use App\Http\Controllers\MunicipioController; // Importa el controlador MunicipioController
+use App\Http\Controllers\MunicipioController;
+use App\Http\Controllers\PaisController; // Importa el controlador PaisController 
+// Importa el controlador MunicipioController
 use App\Models\Comuna;
 
 /*
@@ -45,3 +47,6 @@ Route :: get('/departamento/create',[DepartamentoContoller::class, 'create']) ->
 Route :: delete('/departamento/{departamento}',[DepartamentoContoller::class, 'destroy']) ->name ('departamento.destroy');
 Route :: put('/departamento/{departamento}',[DepartamentoContoller::class, 'update']) ->name ('departamento.update');
 Route :: get('/departamento/{departamento}/edit',[DepartamentoContoller::class, 'edit']) ->name ('departamento.edit');
+
+//Rutas para el controlador de paises
+Route::get('/pais', [PaisController::class, 'index'])->name('pais.index');
