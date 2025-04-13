@@ -40,3 +40,5 @@ Route:: get('/municipio/{municipio}/edit', [MunicipioController::class, 'edit'])
 //Rutas para el controlador de Departamentos
 
 Route :: get('/departamento',[DepartamentoContoller::class, 'index']) ->name ('departamento.index');
+Route :: post('/departamento',[DepartamentoContoller::class, 'store']) ->name ('departamento.store');
+Route :: get('/departamento/create',[DepartamentoContoller::class, 'create']) ->name ('departamento.create');
