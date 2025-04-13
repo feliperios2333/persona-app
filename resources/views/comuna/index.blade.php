@@ -26,7 +26,7 @@
                 </tr>
             </thead>
             <tbody>
-                /**
+                <!--
                  * Este código itera a través de una colección de comunas y genera filas de una tabla HTML.
                  * 
                  * - `$comunas`: Una colección de objetos que representan comunas.
@@ -39,7 +39,7 @@
                  * Notas:
                  * - Asegúrate de que la variable `$comunas` esté correctamente definida y pasada a la vista desde el controlador.
                  * - El código HTML utiliza Bootstrap para el estilo de la tabla.
-                 */
+                 * -->
                 @foreach ($comunas as $comuna)
                 <tr>
                     <th scope="row">{{$comuna->comu_codi}}</th>

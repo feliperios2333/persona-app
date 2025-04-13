@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Comunacontroller; // Importa el controlador Comunacontroller
+use App\Models\Comuna;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/comuna', [Comunacontroller::class, 'index']); // Ruta para mostrar el listado de comunas
+Route::get('/comuna', [Comunacontroller::class, 'index']) ->name ('comuna.index');
+Route ::post('/comuna',[Comunacontroller :: class, 'store']) -> name ('comuna.store'); 
+Route ::get ('/comuna/create',[Comunacontroller :: class, 'create']) -> name ('comuna.create');
+// Ruta para mostrar el listado de comunas
