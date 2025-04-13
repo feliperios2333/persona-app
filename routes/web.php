@@ -42,3 +42,4 @@ Route:: get('/municipio/{municipio}/edit', [MunicipioController::class, 'edit'])
 Route :: get('/departamento',[DepartamentoContoller::class, 'index']) ->name ('departamento.index');
 Route :: post('/departamento',[DepartamentoContoller::class, 'store']) ->name ('departamento.store');
 Route :: get('/departamento/create',[DepartamentoContoller::class, 'create']) ->name ('departamento.create');
+Route :: delete('/departamento/{departamento}',[DepartamentoContoller::class, 'destroy']) ->name ('departamento.destroy');

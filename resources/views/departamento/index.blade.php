@@ -32,7 +32,14 @@
                     <td>{{$departamento ->depa_nomb}}</td>
                     <td>{{$departamento->pais_nomb}}</td>
                     <td>
-                        <span>actions</span>
+                    <form action="{{ route ('departamento.destroy' , ['departamento' =>$departamento->depa_codi]) }}"
+                            method="POST" style="display:inline-block">
+                            @method ('delete')
+                            @csrf
+
+                            <input class="btn btn-danger" type="submit" value="Delete">
+
+                        </form>
                     <td>
                 </tr>
                 @endforeach
