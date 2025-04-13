@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Comunacontroller; // Importa el controlador Comunacontroller
+use App\Http\Controllers\DepartamentoContoller;
 use App\Http\Controllers\MunicipioController; // Importa el controlador MunicipioController
 use App\Models\Comuna;
 
@@ -35,3 +36,7 @@ Route:: get('/municipio/create', [MunicipioController::class, 'create']) ->name(
 Route:: delete('/municipio/{municipio}', [MunicipioController::class, 'destroy']) ->name('municipio.destroy');
 Route:: put('/municipio/{municipio}', [MunicipioController::class, 'update']) ->name('municipio.update');
 Route:: get('/municipio/{municipio}/edit', [MunicipioController::class, 'edit']) ->name('municipio.edit');
+
+//Rutas para el controlador de Departamentos
+
+Route :: get('/departamento',[DepartamentoContoller::class, 'index']) ->name ('departamento.index');
