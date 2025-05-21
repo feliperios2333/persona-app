@@ -15,7 +15,9 @@ class PaisController extends Controller
      */
     public function index()
     {
-        $paises = Pais::all();
+        $paises = DB::table('tb_pais')
+            ->select('tb_pais.*')
+            ->get();
         return view('pais.index', ['paises' => $paises]);
     }
 
@@ -26,7 +28,10 @@ class PaisController extends Controller
      */
     public function create()
     {
-        //
+        $paises = DB::table('tb_pais')
+            ->orderBy('pais_capi')
+            ->get();
+        return view('pais.new', ['paises' => $paises]);
     }
 
     /**
@@ -37,7 +42,17 @@ class PaisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pais = new Pais();
+        $pais->pais_nomb = $request->input('pais_nomb');
+        $pais->pais_capi = $request->input('pais_capi');
+        $pais->pais_codi = $request->input('pais_codi');
+    
+        $pais->save();
+
+        $paises = DB::table('tb_pais')
+            ->select('tb_pais.*')
+            ->get();
+        return view('pais.index', ['paises' => $paises]);
     }
 
     /**
@@ -59,7 +74,9 @@ class PaisController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pais= Pais::find($id);
+        return view('pais.edit', ['pais' => $pais]);
+
     }
 
     /**
@@ -71,7 +88,12 @@ class PaisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pais = Pais::findOrFail($id);
+
+        $pais->pais_nomb =$request->input('pais_nomb');
+        $pais->pais_capi=$request->input('pais_capi');
+        $pais->save();
+        return redirect()->route('pais.index');
     }
 
     /**
@@ -82,6 +104,11 @@ class PaisController extends Controller
      */
     public function destroy($id)
     {
-        //
+         // Busca la comuna por su ID
+        $pais = Pais::find($id);
+        $pais->delete();
+        return redirect()->route('pais.index');
+        // Realiza una consulta a la base de datos para obtener los registros de la tabla 'tb_comuna'
+        
     }
 }
