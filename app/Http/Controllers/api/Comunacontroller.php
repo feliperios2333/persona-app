@@ -33,11 +33,11 @@ class Comunacontroller extends Controller
     public function store(Request $request)
     {
         $comuna = new Comuna();
-        $comuna->comu_nomb = $request->name;
-        $comuna->muni_codi = $request->code;
+        $comuna->comu_nomb = $request->comu_nomb;
+        $comuna->muni_codi = $request->muni_codi;
         $comuna->save();
 
-        return response()->json(['comuna' => $comuna]);
+        return json_encode(['comuna' => $comuna]);
     }
 
 
@@ -53,7 +53,7 @@ class Comunacontroller extends Controller
         $municipios = DB::table('tb_municipio')
             ->orderBy('muni_nomb')
             ->get();
-        return response()->json(['comuna' => $comuna, 'municipios' => $municipios]);
+        return json_encode(['comuna' => $comuna, 'municipios' => $municipios]);
     }
 
     /**
@@ -70,7 +70,7 @@ class Comunacontroller extends Controller
         $comuna->muni_codi = $request->muni_codi;
         $comuna->save();
 
-        return response()->json(['comuna' => $comuna]);
+        return json_encode(['comuna' => $comuna]);
     }
 
     /**
@@ -88,6 +88,6 @@ class Comunacontroller extends Controller
             ->select('tb_comuna.*', 'tb_municipio.muni_nomb')
             ->get();
         // Retorna la vista 'comuna.index' y pasa los registros obtenidos como una variable llamada 'comunas'
-        return response()->json(['comunas' => $comunas, 'succeso' => 'Comuna eliminada correctamente']);
+        return response()->json(['comunas' => $comunas]);
     }
 }
